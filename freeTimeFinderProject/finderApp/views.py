@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import StartTimeRange, EndTimeRange
 
 # Create your views here.
-def algorithm():
-    return ['9:00 AM - 10:00 AM', '10:00 AM - 11:00 AM', '11:00 AM - 12:00 PM']
-
 def index(request):
-    timeframes = algorithm()
-    context = {'values': timeframes}
+    start_time_ranges = StartTimeRange.objects.all()
+    end_time_ranges = EndTimeRange.objects.all()
+    context = {'start_time_ranges': start_time_ranges, 'end_time_ranges': end_time_ranges}
     return render(request, 'finder.html', context)
